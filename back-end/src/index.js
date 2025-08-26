@@ -12,11 +12,20 @@ const app = express()
 
 //setupWebsocket(server)
 
-mongoose.connect('mongodb+srv://omnistack10:<senha>@cluster0-00lsr.mongodb.net/week10?retryWrites=true&w=majority', {
+const mongoConnection = 'mongodb://root:admin@172.17.0.2:27017/?authSource=admin'
+mongoose.connect(mongoConnection , {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
 })
+.then(() => console.log('✅ Conectado ao MongoDB'))
+.catch(err => console.error('❌ Erro ao conectar ao MongoDB:', err));
+
+// mongoose.connect('mongodb+srv://omnistack10:<senha>@cluster0-00lsr.mongodb.net/week10?retryWrites=true&w=majority', {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//     useCreateIndex: true,
+// })
 
 app.use(cors())
 app.use(express.json())
